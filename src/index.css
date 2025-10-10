@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Bio Portfolio Design System - Dark theme with green accent
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 142 76% 36%;
+    --primary-foreground: 240 10% 3.9%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 142 76% 36%;
+    --accent-foreground: 240 10% 3.9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 142 76% 36%;
+
+    --radius: 1rem;
+    
+    /* Custom tokens for bio portfolio */
+    --surface: 240 5.9% 10%;
+    --surface-elevated: 240 3.7% 15.9%;
+    --text-primary: 0 0% 98%;
+    --text-secondary: 240 5% 64.9%;
+    --text-accent: 142 76% 36%;
+    --gradient-primary: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 46%));
+    --shadow-glow: 0 0 20px hsl(142 76% 36% / 0.2);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    overflow-x: hidden;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .profile-card {
+    @apply bg-surface rounded-3xl border border-border p-6;
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .nav-dot {
+    @apply w-2 h-2 rounded-full bg-muted-foreground/30 cursor-pointer transition-all duration-300;
+  }
+  
+  .nav-dot.active {
+    @apply bg-accent w-8;
+  }
+  
+  .section-tag {
+    @apply text-xs font-medium text-muted-foreground uppercase tracking-wider;
+  }
+  
+  .skill-badge {
+    @apply bg-surface-elevated text-foreground px-4 py-2 rounded-full text-sm font-medium border border-border transition-all duration-300 hover:border-accent hover:text-accent;
+  }
+  
+  .project-card {
+    @apply bg-surface-elevated rounded-2xl border border-border overflow-hidden transition-all duration-300 hover:border-accent hover:shadow-lg;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-accent to-accent/80 text-accent-foreground px-6 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg hover:scale-105;
+  }
+  
+  .btn-outline {
+    @apply border border-border text-foreground px-6 py-3 rounded-full font-medium transition-all duration-300 hover:border-accent hover:text-accent;
+  }
+}
