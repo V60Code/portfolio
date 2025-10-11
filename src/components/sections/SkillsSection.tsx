@@ -18,7 +18,7 @@ export const SkillsSection = () => {
   ];
 
   return (
-    <section id="skills" className="min-h-screen py-20">
+    <section id="skills" className="section-min section-spacing">
       <div className="mb-8">
         <span className="section-tag">SKILLS</span>
       </div>

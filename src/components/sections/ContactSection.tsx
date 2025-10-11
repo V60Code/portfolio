@@ -23,7 +23,7 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="min-h-screen py-20">
+    <section id="contact" className="section-min section-spacing">
       <div className="mb-8">
         <span className="section-tag">CONTACT</span>
       </div>

@@ -1,6 +1,6 @@
 export const AboutSection = () => {
   return (
-    <section id="about" className="min-h-screen py-20">
+    <section id="about" className="section-min section-spacing">
       <div className="mb-8">
         <span className="section-tag">ABOUT</span>
       </div>
