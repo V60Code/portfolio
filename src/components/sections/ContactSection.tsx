@@ -59,7 +59,7 @@ export const ContactSection = () => {
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-surface-elevated border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+              className="w-full px-4 py-3 bg-surface-elevated rounded-lg focus:outline-none transition-colors"
               required
             />
           </div>
@@ -74,7 +74,7 @@ export const ContactSection = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-surface-elevated border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+              className="w-full px-4 py-3 bg-surface-elevated rounded-lg focus:outline-none transition-colors"
               required
             />
           </div>
@@ -89,7 +89,7 @@ export const ContactSection = () => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-surface-elevated border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+              className="w-full px-4 py-3 bg-surface-elevated rounded-lg focus:outline-none transition-colors"
             />
           </div>
           
@@ -102,7 +102,7 @@ export const ContactSection = () => {
               name="budget"
               value={formData.budget}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-surface-elevated border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+              className="w-full px-4 py-3 bg-surface-elevated rounded-lg focus:outline-none transition-colors"
             >
               <option value="">Select Budget Range</option>
               <option value="under-1000">Under $1,000</option>
@@ -122,12 +122,12 @@ export const ContactSection = () => {
               value={formData.message}
               onChange={handleChange}
               rows={4}
-              className="w-full px-4 py-3 bg-surface-elevated border border-border rounded-lg focus:border-accent focus:outline-none transition-colors resize-vertical"
+              className="w-full px-4 py-3 bg-surface-elevated rounded-lg focus:outline-none transition-colors resize-vertical"
               required
             />
           </div>
           
-          <button type="submit" className="btn-primary w-full">
+          <button type="submit" className="btn bg-primary text-primary-foreground hover:bg-primary/90 w-full">
             Send Message
           </button>
         </form>

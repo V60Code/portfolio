@@ -63,6 +63,17 @@ const Index = () => {
     });
 
     const refreshHandler = () => locoScroll.resize();
+    // Pause/resume smooth scrolling when modal requests scroll lock
+    const onScrollLock = (e: Event) => {
+      const detail = (e as CustomEvent<{ locked: boolean }>).detail;
+      const locked = detail?.locked ?? false;
+      if (locked) {
+        locoScroll.stop();
+      } else {
+        locoScroll.start();
+      }
+    };
+    window.addEventListener("app:scroll-lock", onScrollLock as EventListener);
     ScrollTrigger.addEventListener("refresh", refreshHandler);
     ScrollTrigger.refresh();
 
@@ -88,6 +99,7 @@ const Index = () => {
     return () => {
       triggers.forEach((t) => t.kill());
       ScrollTrigger.removeEventListener("refresh", refreshHandler);
+      window.removeEventListener("app:scroll-lock", onScrollLock as EventListener);
       locoScroll.destroy();
     };
   }, []);

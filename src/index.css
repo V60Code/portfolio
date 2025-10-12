@@ -87,7 +87,7 @@ All colors MUST be HSL.
 
 @layer components {
   .profile-card {
-    @apply bg-surface rounded-3xl border border-border p-6;
+    @apply bg-surface rounded-3xl p-6;
     box-shadow: var(--shadow-glow);
   }
   
@@ -104,20 +104,13 @@ All colors MUST be HSL.
   }
   
   .skill-badge {
-    @apply bg-surface-elevated text-foreground px-4 py-2 rounded-full text-sm font-medium border border-border transition-all duration-300 hover:border-accent hover:text-accent;
+    @apply bg-surface-elevated text-foreground px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:text-accent;
   }
   
   .project-card {
-    @apply bg-surface-elevated rounded-2xl border border-border overflow-hidden transition-all duration-300 hover:border-accent hover:shadow-lg;
+    @apply bg-surface-elevated rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg;
   }
   
-  .btn-primary {
-    @apply bg-gradient-to-r from-accent to-accent/80 text-accent-foreground px-6 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg hover:scale-105;
-  }
-  
-  .btn-outline {
-    @apply border border-border text-foreground px-6 py-3 rounded-full font-medium transition-all duration-300 hover:border-accent hover:text-accent;
-  }
 
   /* Uniform vertical spacing for all sections */
   .section-spacing {
@@ -128,4 +121,9 @@ All colors MUST be HSL.
   .section-min {
     @apply min-h-[70vh] md:min-h-[75vh] lg:min-h-[80vh];
   }
+  
+  /* Embla carousel base styles with DaisyUI */
+  .embla { overflow: hidden; }
+  .embla__container { will-change: transform; }
+  .embla__slide { position: relative; }
 }

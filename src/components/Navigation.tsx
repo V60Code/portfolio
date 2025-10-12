@@ -22,7 +22,7 @@ export const Navigation = ({ activeSection, onSectionChange }: NavigationProps) 
     // Mobile Navigation - Bottom positioned with glass effect, matching ProfileCard width
     return (
       <div className="fixed bottom-4 left-8 right-8 z-50">
-        <div className="bg-background/20 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl shadow-black/20">
+        <div className="bg-background/20 backdrop-blur-xl rounded-3xl shadow-2xl shadow-black/20">
           {/* Glass effect overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent rounded-3xl"></div>
           <div className="relative flex justify-center items-center px-4 py-3">
@@ -65,12 +65,12 @@ export const Navigation = ({ activeSection, onSectionChange }: NavigationProps) 
             <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
               activeSection === item.id 
                 ? 'bg-accent text-accent-foreground' 
-                : 'border border-border hover:border-accent hover:text-accent'
+                : 'hover:text-accent'
             }`}>
               <item.icon size={16} />
             </div>
             {activeSection === item.id && (
-              <div className="absolute right-12 bg-surface-elevated px-3 py-1 rounded-full border border-border">
+              <div className="absolute right-12 bg-surface-elevated px-3 py-1 rounded-full">
                 <span className="text-xs text-accent uppercase">{item.label}</span>
               </div>
             )}
