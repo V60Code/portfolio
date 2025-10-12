@@ -25,6 +25,14 @@ export const ResumeSection = () => {
       category: "professional",
     },
     {
+      period: "Feb 2025 - May 2025",
+      position: "Web Developer",
+      company: "KKN 61 UIN Sunan Kalijaga 2025",
+      description:
+        "Create a livestock information system website using laravel and filament.",
+      category: "professional",
+    },
+    {
       period: "Jan 2024 - Feb 2025",
       position: "Co-Lead",
       company: "Himpunan Mahasiswa Informatika UIN Sunan Kalijaga",
