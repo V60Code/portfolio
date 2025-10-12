@@ -1,6 +1,6 @@
 export const AboutSection = () => {
   return (
-    <section id="about" className="section-min section-spacing">
+    <section id="about" data-scroll-section className="section-min section-spacing">
       <div className="mb-8">
         <span className="section-tag">ABOUT</span>
       </div>

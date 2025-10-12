@@ -18,7 +18,7 @@ export const SkillsSection = () => {
   ];
 
   return (
-    <section id="skills" className="section-min section-spacing">
+    <section id="skills" data-scroll-section className="section-min section-spacing">
       <div className="mb-8">
         <span className="section-tag">SKILLS</span>
       </div>

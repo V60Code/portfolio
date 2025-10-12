@@ -1,6 +1,6 @@
 export const IntroduceSection = () => {
   return (
-    <section id="introduce" className="section-min section-spacing flex items-center">
+    <section id="introduce" data-scroll-section className="section-min section-spacing flex items-center">
       <div className="max-w-4xl">
         <div className="mb-8">
           <span className="section-tag">INTRODUCE</span>

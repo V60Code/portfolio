@@ -26,7 +26,7 @@ export const PortfolioSection = () => {
   ];
 
   return (
-    <section id="portfolio" className="section-min section-spacing">
+    <section id="portfolio" data-scroll-section className="section-min section-spacing">
       <div className="mb-8">
         <span className="section-tag">PORTFOLIO</span>
       </div>

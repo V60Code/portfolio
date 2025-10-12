@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ProfileCard } from "@/components/ProfileCard";
 import { Navigation } from "@/components/Navigation";
 import { IntroduceSection } from "@/components/sections/IntroduceSection";
@@ -8,35 +8,83 @@ import { SkillsSection } from "@/components/sections/SkillsSection";
 import { PortfolioSection } from "@/components/sections/PortfolioSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { useIsMobile } from "@/hooks/use-mobile";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import LocomotiveScroll from "locomotive-scroll";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("introduce");
   const isMobile = useIsMobile();
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const locoRef = useRef<LocomotiveScroll | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ["introduce", "about", "resume", "skills", "portfolio", "contact"];
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
+    gsap.registerPlugin(ScrollTrigger);
+    const container = containerRef.current;
+    if (!container) return;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i]);
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(sections[i]);
-          break;
+    let lastScroll = 0;
+    const locoScroll = new LocomotiveScroll({
+      // lenis-based smooth scroll options
+      lenisOptions: {
+        lerp: 0.1,
+      },
+      autoStart: true,
+      scrollCallback: (values) => {
+        lastScroll = values.scroll;
+        ScrollTrigger.update();
+      },
+    });
+    locoRef.current = locoScroll;
+
+    // Ensure RAF is running (v5 uses Lenis under the hood)
+    locoScroll.start();
+
+    ScrollTrigger.scrollerProxy(container, {
+      scrollTop(value) {
+        if (!locoRef.current) return 0;
+        if (value !== undefined) {
+          locoRef.current.scrollTo(value, { duration: 0, immediate: true });
+          return 0;
         }
-      }
+        return lastScroll;
+      },
+      getBoundingClientRect() {
+        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+      },
+      pinType: (container as HTMLElement).style.transform ? "transform" : "fixed",
+    });
+
+    const refreshHandler = () => locoScroll.resize();
+    ScrollTrigger.addEventListener("refresh", refreshHandler);
+    ScrollTrigger.refresh();
+
+    const sections = ["introduce", "about", "resume", "skills", "portfolio", "contact"];
+    const triggers = sections.map((id) =>
+      ScrollTrigger.create({
+        trigger: `#${id}`,
+        scroller: container,
+        start: "top center",
+        end: "bottom center",
+        onEnter: () => setActiveSection(id),
+        onEnterBack: () => setActiveSection(id),
+      })
+    );
+
+    return () => {
+      triggers.forEach((t) => t.kill());
+      ScrollTrigger.removeEventListener("refresh", refreshHandler);
+      locoScroll.destroy();
     };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Check initial position
-
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleSectionChange = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+    const selector = `#${sectionId}`;
+    if (locoRef.current) {
+      locoRef.current.scrollTo(selector, { duration: 1 });
+    } else {
+      const section = document.getElementById(sectionId);
+      section?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -51,7 +99,7 @@ const Index = () => {
       <Navigation activeSection={activeSection} onSectionChange={handleSectionChange} />
 
       {/* Main Content */}
-      <div className={`lg:ml-80 lg:mr-32 px-8 lg:px-16 ${isMobile ? 'pb-20' : ''}`}>
+      <div ref={containerRef} data-scroll-container className={`lg:ml-80 lg:mr-32 px-8 lg:px-16 ${isMobile ? 'pb-20' : ''}`}>
         {/* Profile Card - Top position for Mobile */}
         {isMobile && (
           <div className="mb-8 pt-8">
