@@ -50,16 +50,30 @@ const Index = () => {
         return lastScroll;
       },
       getBoundingClientRect() {
-        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
       },
-      pinType: (container as HTMLElement).style.transform ? "transform" : "fixed",
+      pinType: (container as HTMLElement).style.transform
+        ? "transform"
+        : "fixed",
     });
 
     const refreshHandler = () => locoScroll.resize();
     ScrollTrigger.addEventListener("refresh", refreshHandler);
     ScrollTrigger.refresh();
 
-    const sections = ["introduce", "about", "resume", "skills", "portfolio", "contact"];
+    const sections = [
+      "introduce",
+      "about",
+      "resume",
+      "skills",
+      "portfolio",
+      "contact",
+    ];
     const triggers = sections.map((id) =>
       ScrollTrigger.create({
         trigger: `#${id}`,
@@ -96,17 +110,24 @@ const Index = () => {
       </div>
 
       {/* Navigation - Fixed Right */}
-      <Navigation activeSection={activeSection} onSectionChange={handleSectionChange} />
+      <Navigation
+        activeSection={activeSection}
+        onSectionChange={handleSectionChange}
+      />
 
       {/* Main Content */}
-      <div ref={containerRef} data-scroll-container className={`lg:ml-80 lg:mr-32 px-8 lg:px-16 ${isMobile ? 'pb-20' : ''}`}>
+      <div
+        ref={containerRef}
+        data-scroll-container
+        className={`lg:ml-80 lg:mr-32 px-8 lg:px-16 ${isMobile ? "pb-20" : ""}`}
+      >
         {/* Profile Card - Top position for Mobile */}
         {isMobile && (
           <div className="mb-8 pt-8">
             <ProfileCard />
           </div>
         )}
-        
+
         <IntroduceSection />
         <AboutSection />
         <ResumeSection />
@@ -114,8 +135,6 @@ const Index = () => {
         <PortfolioSection />
         <ContactSection />
       </div>
-
-
     </div>
   );
 };
