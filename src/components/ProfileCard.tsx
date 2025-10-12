@@ -1,16 +1,18 @@
 import { Github, Linkedin, Instagram, Youtube, Mail } from "lucide-react";
-import profileImage from "@/assets/profile.jpg";
+import profileImage from "@/assets/profile.png";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export const ProfileCard = () => {
   const isMobile = useIsMobile();
-  
+
   return (
-    <div className={`profile-card w-full ${isMobile ? '' : 'max-w-xs'}`}>
+    <div className={`profile-card w-full ${isMobile ? "" : "max-w-xs"}`}>
       {/* Header */}
       <div className="text-center mb-6">
         <h1 className="text-2xl font-bold mb-1">ALFARIZI</h1>
-        <p className="text-muted-foreground text-sm">Full-stack Developer & Android Developer</p>
+        <p className="text-muted-foreground text-sm">
+          Full-stack Developer & Android Developer
+        </p>
       </div>
 
       {/* Profile Image */}
@@ -18,7 +20,7 @@ export const ProfileCard = () => {
         <img
           src={profileImage}
           alt="Muhammad Alfarizi Habibullah"
-          className="w-full aspect-square object-cover rounded-2xl"
+          className="w-full max-w-[200px] aspect-square mx-auto object-cover rounded-xl"
         />
       </div>
 
@@ -69,9 +71,7 @@ export const ProfileCard = () => {
       </div>
 
       {/* CTA Button */}
-      <button className="btn-primary w-full mb-6">
-        WORK WITH ME
-      </button>
+      <button className="btn-primary w-full mb-6">WORK WITH ME</button>
 
       {/* Copyright */}
       <p className="text-xs text-muted-foreground text-center">
