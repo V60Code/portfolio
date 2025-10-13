@@ -1,5 +1,5 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "portfolio_fariz",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -47,6 +47,7 @@
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.6.0",
     "embla-carousel-wheel-gestures": "^8.1.0",
+    "framer-motion": "^12.23.24",
     "gsap": "^3.13.0",
     "input-otp": "^1.4.2",
     "locomotive-scroll": "^5.0.0-beta.21",

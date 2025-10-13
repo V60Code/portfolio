@@ -32,11 +32,11 @@ export const Carousel: React.FC<CarouselProps> = ({ slides, className }) => {
   const scrollTo = (idx: number) => emblaApi?.scrollTo(idx);
 
   return (
-    <div className={`space-y-3 ${className || ""}`}>
-      <div className="embla overscroll-none touch-pan-x" ref={emblaRef}>
-        <div className="embla__container flex">
+    <div className={`space-y-4 ${className || ""}`}>
+      <div className="embla overscroll-none touch-pan-x overflow-hidden" ref={emblaRef}>
+        <div className="embla__container flex -ml-4 md:-ml-6">
           {slides.map((slide, idx) => (
-            <div key={idx} className="embla__slide min-w-0 flex-[0_0_100%]">
+            <div key={idx} className="embla__slide min-w-0 flex-[0_0_100%] pl-4 md:pl-6">
               <div className="rounded-lg overflow-hidden">
                 {slide}
               </div>
@@ -44,17 +44,17 @@ export const Carousel: React.FC<CarouselProps> = ({ slides, className }) => {
           ))}
         </div>
       </div>
-      <div className="flex items-center gap-2 justify-center">
+      <div className="flex items-center gap-3 justify-center py-2">
         {slides.map((_, idx) => {
           const isActive = selectedIndex === idx;
           return (
             <button
               key={`indicator-${idx}`}
-              className={`btn btn-ghost btn-xs ${isActive ? "bg-primary text-primary-foreground" : ""}`}
+              className={`h-2.5 w-2.5 rounded-full transition-colors ${isActive ? "bg-primary" : "bg-base-300 hover:bg-base-200"}`}
               onClick={() => scrollTo(idx)}
               aria-label={`Ke slide ${idx + 1}`}
             >
-              {idx + 1}
+              {/* dot */}
             </button>
           );
         })}

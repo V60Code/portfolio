@@ -120,7 +120,9 @@ export const ResumeSection = () => {
             <h3 className="text-2xl md:text-3xl font-semibold mb-8">
               {group.title}
             </h3>
-            <div className="space-y-12">
+            <div className="relative pl-8 space-y-12">
+              {/* Continuous left vertical line for the whole group */}
+              <div className="absolute left-0 top-0 bottom-0 border-l-2 border-border"></div>
               {experiences
                 .filter((exp) => exp.category === group.key)
                 .sort(
@@ -129,12 +131,10 @@ export const ResumeSection = () => {
                     getEndDate(a.period).getTime()
                 )
                 .map((exp, index) => (
-                  <div
-                    key={`${group.key}-${index}`}
-                    className="border-l-2 border-border pl-8"
-                  >
-                    <div className="relative">
-                      <div className="absolute -left-10 w-4 h-4 bg-accent rounded-full"></div>
+                  <div key={`${group.key}-${index}`} className="relative pl-8">
+                    {/* Green dot centered on the left vertical line */}
+                    <div className="absolute top-0 -left-8 -translate-x-1/2 w-4 h-4 bg-accent rounded-full"></div>
+                    <div>
                       <p className="text-sm text-accent mb-2">{exp.period}</p>
                       <p className="text-xl font-bold mb-1">{exp.position}</p>
                       <p className="text-muted-foreground mb-3">

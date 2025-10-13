@@ -33,20 +33,22 @@ export const Modal: React.FC<ModalProps> = ({ open, onOpenChange, title, descrip
 
   return (
     <div className={`modal ${open ? "modal-open" : ""}`}>
-      <div className="modal-box">
+      <div className="modal-box max-w-2xl md:max-w-3xl p-0 overflow-hidden bg-base-200/80 backdrop-blur rounded-2xl shadow-xl">
         {(title || description) && (
-          <div className="mb-4">
-            {title && <h3 className="font-bold text-lg">{title}</h3>}
+          <div className="px-6 pt-6">
+            {title && <h3 className="font-bold text-2xl">{title}</h3>}
             {description && <p className="py-2 text-sm text-muted-foreground">{description}</p>}
           </div>
         )}
-        {children}
-        <div className="modal-action">
-          <button className="btn" onClick={() => onOpenChange(false)}>Close</button>
+        <div className="px-6 pb-6">
+          {children}
+        </div>
+        <div className="modal-action px-6 pb-6">
+          <button className="btn btn-outline" onClick={() => onOpenChange(false)}>Close</button>
         </div>
       </div>
       {/* backdrop close */}
-      <div className="modal-backdrop" onClick={() => onOpenChange(false)} />
+      <div className="modal-backdrop bg-black/60 backdrop-blur-sm" onClick={() => onOpenChange(false)} />
     </div>
   );
 };
