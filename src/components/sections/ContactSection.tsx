@@ -23,25 +23,25 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" data-scroll-section className="section-min section-spacing">
+    <section id="contact" data-scroll-section className="section-min section-spacing px-4 sm:px-6 lg:px-16">
       <div className="mb-8">
         <span className="section-tag">CONTACT</span>
       </div>
       
-      <h2 className="text-4xl md:text-6xl font-bold leading-tight mb-16">
+      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight mb-10 md:mb-16">
         Let's Work Together!
       </h2>
       
-      <div className="grid lg:grid-cols-2 gap-16">
+      <div className="grid gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
-          <p className="text-lg text-muted-foreground mb-8">
+          <p className="text-base sm:text-lg text-muted-foreground mb-8">
             Ready to bring your ideas to life? I'm always excited to work on new projects and collaborate with amazing people.
           </p>
           
           <div className="space-y-4">
             <a 
               href="mailto:m.alfarizihabibullah@gmail.com"
-              className="text-accent hover:text-accent/80 transition-colors text-lg"
+              className="text-accent hover:text-accent/80 transition-colors text-base sm:text-lg break-words"
             >
               m.alfarizihabibullah@gmail.com
             </a>

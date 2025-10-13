@@ -1,0 +1,31 @@
+@keyframes scrollLeftToRight {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scrollRightToLeft {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.logo-row-scroll {
+  width: max-content;
+  display: flex;
+  transition: animation-direction 0.3s ease;
+}
+
+.logo-row-scroll-down {
+  animation: scrollLeftToRight 25s linear infinite;
+}
+
+.logo-row-scroll-up {
+  animation: scrollRightToLeft 25s linear infinite;
+}

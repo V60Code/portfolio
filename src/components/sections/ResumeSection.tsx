@@ -1,11 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import type { Variants } from "framer-motion";
-type ResumeSectionProps = {
-  isActive?: boolean;
-};
-
-export const ResumeSection = ({ isActive = false }: ResumeSectionProps) => {
+export const ResumeSection = () => {
   type GroupKey = "education" | "professional" | "organization";
   type Experience = {
     period: string;
@@ -116,17 +112,21 @@ export const ResumeSection = ({ isActive = false }: ResumeSectionProps) => {
     return new Date(year, month, 1);
   };
 
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
   const [hasPlayed, setHasPlayed] = useState(false);
   const [playedGroups, setPlayedGroups] = useState<Record<GroupKey, boolean>>({
     education: false,
     professional: false,
     organization: false,
   });
+
   useEffect(() => {
-    if (isActive && !hasPlayed) {
+    if (isInView && !hasPlayed) {
       setHasPlayed(true);
     }
-  }, [isActive, hasPlayed]);
+  }, [isInView, hasPlayed]);
 
   const animateState = hasPlayed ? "enter" : "initial";
 
@@ -171,11 +171,11 @@ export const ResumeSection = ({ isActive = false }: ResumeSectionProps) => {
           </motion.h3>
         </div>
 
-        <div className="relative pl-8 space-y-12">
-          <div className="absolute left-0 top-0 bottom-0 border-l-2 border-border"></div>
+        <div className="relative pl-6 md:pl-8 space-y-8 md:space-y-12 overflow-x-hidden">
+          <div className="absolute left-0 top-0 bottom-0 border-l border-border md:border-l-2"></div>
           {items.map((exp, index) => (
-            <div key={`${group.key}-${index}`} className="relative pl-8">
-              <div className="absolute top-0 -left-8 -translate-x-1/2 w-4 h-4 bg-accent rounded-full"></div>
+            <div key={`${group.key}-${index}`} className="relative pl-6 md:pl-8 overflow-x-hidden">
+              <div className="absolute top-0 left-0 -translate-x-1/2 w-3 h-3 md:w-4 md:h-4 bg-accent rounded-full"></div>
               <div>
                 <div className="overflow-hidden">
                   <motion.p
@@ -183,7 +183,7 @@ export const ResumeSection = ({ isActive = false }: ResumeSectionProps) => {
                     variants={lineVariants}
                     initial={initialTarget}
                     animate={animateTarget}
-                    className="text-sm text-accent mb-2"
+                    className="text-xs md:text-sm text-accent mb-2"
                   >
                     {exp.period}
                   </motion.p>
@@ -195,7 +195,7 @@ export const ResumeSection = ({ isActive = false }: ResumeSectionProps) => {
                     variants={lineVariants}
                     initial={initialTarget}
                     animate={animateTarget}
-                    className="text-xl font-bold mb-1"
+                    className="text-lg md:text-xl font-bold mb-1"
                   >
                     {exp.position}
                   </motion.p>
@@ -207,7 +207,7 @@ export const ResumeSection = ({ isActive = false }: ResumeSectionProps) => {
                     variants={lineVariants}
                     initial={initialTarget}
                     animate={animateTarget}
-                    className="text-muted-foreground mb-3"
+                    className="text-sm md:text-base text-muted-foreground mb-3"
                   >
                     {exp.company}
                   </motion.p>
@@ -219,7 +219,7 @@ export const ResumeSection = ({ isActive = false }: ResumeSectionProps) => {
                     variants={lineVariants}
                     initial={initialTarget}
                     animate={animateTarget}
-                    className="text-muted-foreground leading-relaxed"
+                    className="text-sm md:text-base text-muted-foreground leading-relaxed"
                   >
                     {exp.description}
                   </motion.p>
@@ -234,28 +234,29 @@ export const ResumeSection = ({ isActive = false }: ResumeSectionProps) => {
 
   return (
     <section
+      ref={sectionRef}
       id="resume"
       data-scroll-section
-      className="section-min section-spacing"
+      className="section-min section-spacing overflow-x-hidden min-w-0"
     >
       <div className="mb-8">
         <span className="section-tag">Experience</span>
       </div>
 
-      <div className="overflow-hidden mb-12">
+      <div className="overflow-hidden mb-8 md:mb-12">
         <motion.h2
           custom={0}
           variants={lineVariants}
           initial="initial"
           animate={animateState}
-          className="text-4xl md:text-6xl font-bold leading-tight"
+          className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight"
         >
           Experience
         </motion.h2>
       </div>
 
       {/* Vertical groups with per-group triggers */}
-      <div className="space-y-24">
+      <div className="space-y-14 md:space-y-24">
         {groups.map((group) => (
           <GroupBlock
             key={group.key}

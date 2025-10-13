@@ -5,7 +5,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Bio Portfolio Design System - Dark theme with green accent
+/* Bio Portfolio Design System - Dark theme with orange accent
 All colors MUST be HSL.
 */
 
@@ -20,7 +20,8 @@ All colors MUST be HSL.
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 142 76% 36%;
+    /* Orange accent: #e7442f ≈ hsl(7 79% 55%) */
+    --primary: 7 79% 55%;
     --primary-foreground: 240 10% 3.9%;
 
     --secondary: 240 3.7% 15.9%;
@@ -29,7 +30,7 @@ All colors MUST be HSL.
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
 
-    --accent: 142 76% 36%;
+    --accent: 7 79% 55%;
     --accent-foreground: 240 10% 3.9%;
 
     --destructive: 0 84.2% 60.2%;
@@ -37,18 +38,18 @@ All colors MUST be HSL.
 
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 142 76% 36%;
+    --ring: 7 79% 55%;
 
     --radius: 1rem;
-    
+
     /* Custom tokens for bio portfolio */
     --surface: 240 5.9% 10%;
     --surface-elevated: 240 3.7% 15.9%;
     --text-primary: 0 0% 98%;
     --text-secondary: 240 5% 64.9%;
-    --text-accent: 142 76% 36%;
-    --gradient-primary: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 46%));
-    --shadow-glow: 0 0 20px hsl(142 76% 36% / 0.2);
+    --text-accent: 7 79% 55%;
+    --gradient-primary: linear-gradient(135deg, hsl(7 79% 55%), hsl(7 79% 65%));
+    --shadow-glow: 0 0 20px hsl(7 79% 55% / 0.2);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
@@ -67,7 +68,6 @@ All colors MUST be HSL.
 
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-
 }
 
 @layer base {
@@ -78,8 +78,36 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground font-sans antialiased;
     overflow-x: hidden;
+    /* Hide visual scrollbar track on WebKit to avoid right-side strip */
   }
-  
+
+  /* Prevent right-side dark strip from scrollbar on small viewports */
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  /* WebKit scrollbar minimal styling to blend with background */
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  /* Firefox hide scrollbar */
+  * {
+    scrollbar-width: none;
+  }
+  /* IE/Edge legacy */
+  body {
+    -ms-overflow-style: none;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -90,27 +118,26 @@ All colors MUST be HSL.
     @apply bg-surface rounded-3xl p-6;
     box-shadow: var(--shadow-glow);
   }
-  
+
   .nav-dot {
     @apply w-2 h-2 rounded-full bg-muted-foreground/30 cursor-pointer transition-all duration-300;
   }
-  
+
   .nav-dot.active {
     @apply bg-accent w-8;
   }
-  
+
   .section-tag {
     @apply text-xs font-medium text-muted-foreground uppercase tracking-wider;
   }
-  
+
   .skill-badge {
     @apply bg-surface-elevated text-foreground px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:text-accent;
   }
-  
+
   .project-card {
     @apply bg-surface-elevated rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg;
   }
-  
 
   /* Uniform vertical spacing for all sections */
   .section-spacing {
@@ -121,9 +148,123 @@ All colors MUST be HSL.
   .section-min {
     @apply min-h-[70vh] md:min-h-[75vh] lg:min-h-[80vh];
   }
-  
+
   /* Embla carousel base styles with DaisyUI */
-  .embla { overflow: hidden; }
-  .embla__container { will-change: transform; }
-  .embla__slide { position: relative; }
+  .embla {
+    overflow: hidden;
+  }
+  .embla__container {
+    will-change: transform;
+  }
+  .embla__slide {
+    position: relative;
+  }
+
+  /* Mask cursor effect overlay */
+  .mask-cursor {
+    /* Overlay oranye terlihat untuk lingkaran */
+    background: hsl(var(--accent));
+    mix-blend-mode: normal;
+    opacity: 0.9; /* terlihat */
+    z-index: 10; /* di bawah overlay teks hitam */
+    -webkit-mask-image: radial-gradient(
+      circle calc(var(--mask-size, 0px) / 2) at var(--mask-x, -10000px)
+        var(--mask-y, -10000px),
+      #fff 98%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      circle calc(var(--mask-size, 0px) / 2) at var(--mask-x, -10000px)
+        var(--mask-y, -10000px),
+      #fff 98%,
+      transparent 100%
+    );
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    /* Fallback/alternative: clip-path mengikuti variabel posisi & ukuran */
+    clip-path: circle(
+      calc(var(--mask-size, 0px) / 2) at var(--mask-x, -10000px)
+        var(--mask-y, -10000px)
+    );
+    /* position & size are within the gradient; no extra properties needed */
+    pointer-events: none;
+  }
+
+  /* Overlay khusus untuk membuat teks menjadi hitam di area lingkaran */
+  .mask-cursor-text {
+    color: #000; /* teks hitam pada area lingkaran */
+    mix-blend-mode: normal;
+    -webkit-mask-image: radial-gradient(
+      circle calc(var(--mask-size, 0px) / 2) at var(--mask-x, -10000px)
+        var(--mask-y, -10000px),
+      #fff 98%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      circle calc(var(--mask-size, 0px) / 2) at var(--mask-x, -10000px)
+        var(--mask-y, -10000px),
+      #fff 98%,
+      transparent 100%
+    );
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    /* Fallback/alternative: clip-path mengikuti variabel posisi & ukuran */
+    clip-path: circle(
+      calc(var(--mask-size, 0px) / 2) at var(--mask-x, -10000px)
+        var(--mask-y, -10000px)
+    );
+    /* position & size are within the gradient; no extra properties needed */
+    z-index: 20; /* berada di atas overlay oranye */
+    pointer-events: none;
+  }
+
+  /* Global small cursor ring */
+  .cursor-ring {
+    background: hsl(
+      var(--accent)
+    ); /* sama warna dengan lingkaran pointer Introduce */
+    box-shadow: 0 0 12px hsl(var(--accent) / 0.35);
+    border-radius: 9999px;
+    z-index: 50;
+  }
+
+  /* Navbar styles */
+  .navbar-backdrop {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .navbar-brand {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .navbar-link {
+    position: relative;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: hsl(var(--accent));
+    transition: width 0.3s ease;
+  }
+
+  .navbar-link:hover::after {
+    width: 100%;
+  }
+
+  .hamburger-line {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+  }
 }
