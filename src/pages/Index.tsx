@@ -141,8 +141,8 @@ const Index = () => {
         )}
 
         <IntroduceSection />
-        <AboutSection />
-        <ResumeSection />
+        <AboutSection isActive={activeSection === "about"} />
+        <ResumeSection isActive={activeSection === "resume"} />
         <SkillsSection />
         <PortfolioSection />
         <ContactSection />
