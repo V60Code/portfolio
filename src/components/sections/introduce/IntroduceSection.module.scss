@@ -1,0 +1,45 @@
+.main {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: black;
+  color: white;
+  padding: 0 2rem;
+}
+
+.paragraph {
+  font-size: 64px;
+  line-height: 66px;
+  max-width: 1000px;
+  margin: 0;
+  font-weight: 400;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+    line-height: 36px;
+  }
+}
+
+.word {
+  margin-right: 12px;
+  margin-top: 12px;
+  position: relative;
+  display: inline-block;
+}
+
+.shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #333333;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.highlighted {
+  position: relative;
+  z-index: 2;
+}

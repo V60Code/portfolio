@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { WelcomeSection } from "@/components/sections/WelcomeSection";
-import { IntroduceSection } from "@/components/sections/IntroduceSection";
+import { WelcomeSection } from "@/components/sections/welcome/WelcomeSection";
+import { IntroduceSection } from "@/components/sections/introduce/IntroduceSection";
 
-import { ResumeSection } from "@/components/sections/ResumeSection";
-import { SkillsSection } from "@/components/sections/SkillsSection";
+import ExperienceSection from "../components/sections/experience/ExperienceSection";
+import { SkillsSection } from "@/components/sections/skills/SkillsSection";
 import { PortfolioSection } from "@/components/sections/PortfolioSection";
-import { ContactSection } from "@/components/sections/ContactSection";
+import { ContactSection } from "@/components/sections/footer/ContactSection";
 import GlobalCursor from "@/components/ui/GlobalCursor";
 import { Navbar } from "@/components/ui/Navbar";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -106,10 +106,12 @@ const Index = () => {
         <div id="introduce">
           <IntroduceSection />
         </div>
+
+        <div id="resume">
+          <ExperienceSection />
+        </div>
+
         <div className="px-8 lg:px-16">
-          <div id="resume">
-            <ResumeSection />
-          </div>
           <div id="skills">
             <SkillsSection />
           </div>

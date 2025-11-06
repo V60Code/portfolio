@@ -24,7 +24,7 @@ export const WelcomeSection = () => {
       gsap.to(slider.current, {
         scrollTrigger: {
           trigger: document.documentElement,
-          scrub: 0.5,
+          scrub: 2,
           start: 0,
           end: window.innerHeight,
           onUpdate: (e) => (direction = e.direction * -1),
