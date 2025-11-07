@@ -4,11 +4,7 @@ import useMousePosition from "@/hooks/use-mouse-position";
 const GlobalCursor = () => {
   const { x, y } = useMousePosition();
   const size = 22; // diameter kecil global
-
-  // Deteksi apakah pointer berada di dalam section introduce
-  const introduceEl = typeof document !== "undefined" ? document.getElementById("introduce") : null;
-  const rect = introduceEl?.getBoundingClientRect();
-  const inIntroduce = rect ? x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom : false;
+  // Selalu tampilkan cursor global, termasuk di section introduce
 
   return (
     <motion.div
@@ -18,8 +14,8 @@ const GlobalCursor = () => {
       animate={{
         x: x - size / 2,
         y: y - size / 2,
-        opacity: inIntroduce ? 0 : 1,
-        scale: inIntroduce ? 0.8 : 1,
+        opacity: 1,
+        scale: 1,
       }}
       transition={{ type: "tween", ease: "easeOut", duration: 0.35 }}
     />
